@@ -1,4 +1,4 @@
-# michaels-slack-nofity
+# michael-slack-nofity
 
 There are people like Michael who don't reply on Slack no matter how much you text them.
 With michael-slack-notify, those people can't argue anymore they didn't see the slack notifications.
