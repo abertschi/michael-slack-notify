@@ -1,12 +1,14 @@
 # michael-slack-nofity
 
 There are people like Michael who don't reply on Slack no matter how much you text them.
-With michael-slack-notify, those people can't argue anymore they didn't see their slack notifications.
+Those people usually work for megacorps where additional software installation is blocked by Windows Group Policy.
+Fortunately there is michael-slack-notify so people like Michael can't argue anymore they didn't see their slack notifications.
 
-## Feautres
-- Notify window that does not disappear unless you close it
+## Features
+- Simple sticky notify window, disappears when all messages read
+
+![screenshot](ui.png)
 
 ## Getting started
-- Install Node.js and npm
-- run `npm install --global michael-slack-nofity`
-- Login to your slack account, run `michael-slack-notify --help` for more information
+- `git clone https://github.com/abertschi/michael-slack-notify.git && cd michael-slack-notify`
+- `npm install`
