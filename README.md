@@ -2,7 +2,7 @@
 
 There are people like Michael who don't reply on Slack no matter how much you text them.
 Those people usually work for megacorps where additional software installation is blocked by Windows Group Policy.
-Fortunately there is michael-slack-notify so people like Michael can't argue anymore they didn't see their slack notifications.
+Fortunately there is michael-slack-notify so people like Michael can't argue anymore they didn't see their slack notifications :D.
 
 ## Features
 - Simple sticky notify window, disappears when all messages read
