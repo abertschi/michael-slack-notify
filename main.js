@@ -132,22 +132,19 @@ function run(options) {
 
       events.on('notification', (channels) => {
         debug('New notification received!');
+        debug(windowIsHidden);
         if (windowIsHidden) {
           windowIsHidden = false;
-          if (!mainWindow) {
-            mainWindow = createWindow();
-            mainWindow.on('closed', () => {
-              windowIsHidden = true;
-            });
-            mainWindow.on('blur', () => {
-              windowIsHidden = true;
-            });
-            mainWindow.on('minimize', () => {
-              windowIsHidden = true;
-            });
-          } else {
-            mainWindow.show();
-          }
+          mainWindow = createWindow();
+          mainWindow.on('closed', () => {
+            windowIsHidden = true;
+          });
+          mainWindow.on('blur', () => {
+            windowIsHidden = true;
+          });
+          mainWindow.on('minimize', () => {
+            windowIsHidden = true;
+          });
         }
       });
       events.on('notification_seen', (channels) => {
@@ -165,7 +162,8 @@ function errorHandling(err) {
   debug('%s, %s'.red, err, err.stack);
   setTimeout(() => {
     debug('Restarting michael-slack-nofity');
-    run();
+    let options = JSON.parse(fs.readFileSync(SETTING_PATH));
+    run(options);
   }, 10000);
 }
 
@@ -207,6 +205,10 @@ let browser;
 let unreadChannels = 0;
 let windowIsHidden = true;
 let mainWindow;
+
+app.on('window-all-closed', function() {
+  windowIsHidden = true;
+});
 
 process.on('uncaughtException', (err) => {
   errorHandling(err);
