@@ -11,6 +11,7 @@ const trace = require('debug')('slack-notify:debug');
 const colors = require('colors');
 const prompt = require('prompt');
 const fs = require('fs');
+const mkdirp = require('mkdirp');
 
 const SETTING_DIR = (process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE) + '/.michael-slack-nofity/';
 const SETTING_PATH = SETTING_DIR + 'michael-slack-notify.json';
@@ -219,12 +220,19 @@ try {
   run(options);
 } catch (err) {
   debug('%s not found', SETTING_PATH);
-  promptCredentials()
-    .then(options => {
-        fs.writeFile(SETTING_PATH, JSON.stringify(options), function (err) {
-          debug(err);
-        });
+  mkdirp(SETTING_DIR, (err) => {
+    if (err) {
+      throw err;
+    }
 
+    promptCredentials()
+      .then(options => {
+        fs.writeFile(SETTING_PATH, JSON.stringify(options), function(err) {
+          if (err) {
+            debug(err);
+          }
+        });
         run(options);
-    }).catch(e => debug(e));
+      }).catch(e => debug(e));
+  });
 }
